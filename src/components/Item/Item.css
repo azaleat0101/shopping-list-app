@@ -1,0 +1,199 @@
+/* КОМПОНЕНТ ITEM - РОЗОВАЯ ТЕМА БЕЗ ПЛАШКИ */
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  background: white;
+  border: 3px solid #FFE4EC;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(to bottom, #FF6B9D, #E84393);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item:hover {
+  border-color: #FF6B9D;
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.15);
+  transform: translateX(5px);
+}
+
+.item.completed {
+  background: #FFF9FB;
+  border-color: #FFD6E0;
+  opacity: 0.8;
+}
+
+.item.completed:hover {
+  border-color: #FF6B9D;
+  opacity: 1;
+}
+
+/* КОНТЕНТ ТОВАРА */
+.item-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  cursor: pointer;
+}
+
+/* КАСТОМНЫЙ ЧЕКБОКС */
+.checkbox-container {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 26px;
+  width: 26px;
+  background-color: white;
+  border: 3px solid #FFD6E0;
+  border-radius: 7px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-input:checked ~ .checkmark {
+  background: linear-gradient(135deg, #FF6B9D 0%, #E84393 100%);
+  border-color: #FF6B9D;
+  animation: checkmarkPop 0.3s ease;
+}
+
+.checkmark:after {
+  content: "✓";
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.checkbox-input:checked ~ .checkmark:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes checkmarkPop {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ТЕКСТ ТОВАРА */
+.item-text {
+  flex: 1;
+}
+
+.text {
+  font-size: 1.1rem;
+  color: #2C3E50;
+  word-break: break-word;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.item.completed .text {
+  text-decoration: line-through;
+  color: #FF6B9D;
+}
+
+/* КНОПКА УДАЛЕНИЯ */
+.delete-button {
+  background: linear-gradient(135deg, #FFF5F7 0%, #FFE4EC 100%);
+  border: 2px solid #FFD6E0;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  color: #FF6B9D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  opacity: 0.7;
+}
+
+.delete-button:hover {
+  opacity: 1;
+  background: linear-gradient(135deg, #FFE4EC 0%, #FFD6E0 100%);
+  border-color: #FF6B9D;
+  color: #E84393;
+  transform: scale(1.1);
+}
+
+.delete-button:active {
+  transform: scale(1);
+}
+
+/* АНИМАЦИИ */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.item {
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Анимация при удалении */
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+  }
+}
+
+.item.deleting {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* Порядок анимаций для списка */
+.items-list > *:nth-child(1) { animation-delay: 0.05s; }
+.items-list > *:nth-child(2) { animation-delay: 0.1s; }
+.items-list > *:nth-child(3) { animation-delay: 0.15s; }
+.items-list > *:nth-child(4) { animation-delay: 0.2s; }
+.items-list > *:nth-child(5) { animation-delay: 0.25s; }
+.items-list > *:nth-child(n+6) { animation-delay: 0.3s; }
