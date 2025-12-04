@@ -1,6 +1,7 @@
 {
   "name": "shopping-list-app",
   "version": "0.1.0",
+  "homepage": "https://azaleat0101.github.io/shopping-list",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
